@@ -90,9 +90,12 @@
     <ClInclude Include="GraphicsObject.h" />
     <ClInclude Include="Ground.h" />
     <ClInclude Include="InputManager.h" />
+    <ClInclude Include="MazeBlock.h" />
     <ClInclude Include="ShaderManager.h" />
     <ClInclude Include="Source.h" />
+    <ClInclude Include="Texture.h" />
     <ClInclude Include="TimeManager.h" />
+    <ClInclude Include="Wall.h" />
     <ClInclude Include="WindowManager.h" />
   </ItemGroup>
   <ItemGroup>
@@ -109,7 +112,7 @@
     <None Include="Shader.Frag" />
     <None Include="Shader.FragText" />
     <None Include="Shader.Vert" />
-    <None Include="Shader.VertTex" />
+    <None Include="Shader.VertText" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

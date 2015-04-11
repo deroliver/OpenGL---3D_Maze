@@ -1,17 +1,10 @@
 #include <iostream>
 #include "Source.h"
 #include "Ground.h"
+#include "Wall.h"
+#include "Texture.h"
 
-GraphicsObject Floor, G;
-Ground Ground_1();
-
-Vertex3 Triangle[4] = { Vertex3(vec3(-10.0,-2.0, 0.0),  vec4(0, 0, 0, 1)),
-						Vertex3(vec3(-10.0,-2.0, 10.0), vec4(0, 0, 0, 1)),
-						Vertex3(vec3( 0.0, -2.0, 10.0), vec4(0, 0, 0, 1)),
-						Vertex3(vec3( 0.0, -2.0, 0.0),  vec4(0, 0, 0, 1)),
-};
-
-int Index = 0;
+Ground Ground_1(300);
 
 int Source::Main() {
 
@@ -23,24 +16,7 @@ int Source::Main() {
 
 	return 0;
 }
-/*
-void quad(int a, int b, int c, int d)
-{
-	for (int i = 0; i < 100; i += 10) {
-		for (int j = 0; j < 100; j += 10) {
-			// Triangle 1
-			Ground[Index].rgba = vec4(1, 1, 1, 1); Ground[Index].xyz = Triangle[a].xyz + vec3(j, 0, i); Index++;
-			Ground[Index].rgba = vec4(1, 1, 1, 1); Ground[Index].xyz = Triangle[b].xyz + vec3(j, 0, i); Index++;
-			Ground[Index].rgba = vec4(1, 1, 1, 1); Ground[Index].xyz = Triangle[c].xyz + vec3(j, 0, i); Index++;
-	
-			// Triangle 2
-			Ground[Index].rgba = vec4(1, 1, 1, 1); Ground[Index].xyz = Triangle[a].xyz + vec3(j, 0, i); Index++;
-			Ground[Index].rgba = vec4(1, 1, 1, 1); Ground[Index].xyz = Triangle[c].xyz + vec3(j, 0, i); Index++;
-			Ground[Index].rgba = vec4(1, 1, 1, 1); Ground[Index].xyz = Triangle[d].xyz + vec3(j, 0, i); Index++;
-		}
-	}
-}
-*/
+
 void Source::Initialize() {
 
 	if (!WindowManager || WindowManager->Initialize(ScreenWidth, ScreenHeight, "MidTerm Project", false) != 0) {
@@ -54,11 +30,7 @@ void Source::Initialize() {
 	// Tells OpenGl we want depth testing so it renders the order correctly
 	glEnable(GL_DEPTH_TEST);
 
-	//quad(0, 1, 2, 3);
-	
-	//G.Initialize(Ground, 1200, "Shader.Vert", "Shader.Frag");
-
-	Ground_1.Init();
+	Ground_1.Initialize(Ground_1.vertices, 300, "Shader.VertText", "Shader.FragText");
 
 	// Create the projection matrix for our camera and make the near field closer and the far field farther
 	Camera->SetPersepective(radians(60.0f), ScreenWidth / (float)ScreenHeight, 0.01f, 1000);
@@ -79,9 +51,8 @@ void Source::GameLoop() {
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
 		Ground_1.Render();
-		//G.Render();
-		//Floor.Render();
-		TimeManager::Instance().Sleep(10);
+
+		//TimeManager::Instance().Sleep(1);
 
 		WindowManager->SwapTheBuffers();
 	}
@@ -90,7 +61,7 @@ void Source::GameLoop() {
 
 void Source::Destroy() {
 
-	Floor.Destroy();
+	Ground_1.Destroy();
 
 	if (WindowManager) {
 		WindowManager->Destroy();

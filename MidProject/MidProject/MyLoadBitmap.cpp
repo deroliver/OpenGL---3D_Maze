@@ -15,7 +15,7 @@ using namespace std;
 #define GL_CHECK_ERRORS \
 { \
 	int err=glGetError(); \
-	if (err!=0) \
+	if (err!= 0) \
 	{   cout << "OpenGL Error: " << err << endl; \
 		assert(err == GL_NO_ERROR); \
 	} \

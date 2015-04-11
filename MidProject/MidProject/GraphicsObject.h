@@ -12,6 +12,7 @@
 #include <glm/gtx/transform2.hpp>						// Used for the GLM math library
 #include "ShaderManager.h"
 #include "Camera.h"
+#include "Texture.h"
 
 using namespace glm;
 
@@ -25,6 +26,7 @@ public:
 	Vertex3(vec3 v1, vec4 v2) : xyz(v1), rgba(v2) {}
 	vec3 xyz;
 	vec4 rgba;
+	vec2 tex;
 };
 
 // Handles initializing, rendering, and destroying a 3D object
@@ -74,8 +76,10 @@ protected:
 	GLint VerticesLength;				// The length of the list of vertices
 
 	GLuint VertexBufferID;				// The VBO ID stored by the VAO
+	GLuint VertexArrayObjectID;			// The VAO ID to bind		
 
-	GLuint VertexArrayObjectID;			// The VAO ID to bind				
+	GLuint TexBufferID;
+	GLuint texID;
 
 	vec3 Position;						// Object's position
 	vec3 Rotation;						// Object's rotation
