@@ -33,7 +33,7 @@ void Ground::Render() {
 	glGenTextures(1, &TexBufferID);
 	glBindTexture(GL_TEXTURE_2D, TexBufferID);
 
-	GLint IDT = MyLoadBitmap("Brick.bmp", GL_TEXTURE_2D, true);
+	
 	texID = Shader.GetVariable("texMap");
 	Shader.SetInt(texID, 0);
 
@@ -89,6 +89,8 @@ void Ground::Render() {
 void Ground::Initialize(Vertex3 vertices[], int length, std::string Vertex, std::string Frag) {
 
 	Shader.Initialize(Vertex, Frag);
+
+	int IDT = MyLoadBitmap("Brick.bmp", GL_TEXTURE_2D, true);
 
 	// Store the vertices and length in member variables
 	Vertices = vertices;

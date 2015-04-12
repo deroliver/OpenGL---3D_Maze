@@ -10,6 +10,7 @@ using namespace std;
 #include "Angel.h"
 #include <GL/glew.h> // for OpenGL extensions
 #include <GL/glut.h> // for Glut utility kit
+#include "GraphicsObject.h"
 
 #ifndef GL_CHECK_ERRORS
 #define GL_CHECK_ERRORS \
@@ -22,7 +23,7 @@ using namespace std;
 }
 #endif
 
-GLuint texture_num = -1;
+//GLuint texture_num = -1;
 
 /**********************************************************
  *
@@ -31,6 +32,7 @@ GLuint texture_num = -1;
  * This function loads a bitmap file and return the OpenGL reference ID to use that texture
  *
  *********************************************************/
+
 
 int MyLoadBitmap(char *filename, GLenum  target, bool AlphaBlend = false ) 
 {
@@ -107,5 +109,5 @@ int MyLoadBitmap(char *filename, GLenum  target, bool AlphaBlend = false )
 
     free(l_texture); // Free the memory we used to load the texture
 
-    return (texture_num); // Returns the current texture OpenGL ID
+	return (texture_num); // Returns the current texture OpenGL ID
 }

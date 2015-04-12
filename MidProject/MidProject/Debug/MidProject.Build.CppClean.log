@@ -9,8 +9,10 @@ c:\users\derik\desktop\midproject\midproject\debug\myloadbitmap.obj
 c:\users\derik\desktop\midproject\midproject\debug\shadermanager.obj
 c:\users\derik\desktop\midproject\midproject\debug\source.obj
 c:\users\derik\desktop\midproject\midproject\debug\timemanager.obj
-c:\users\derik\desktop\midproject\debug\midproject.ilk
-c:\users\derik\desktop\midproject\debug\midproject.exe
+c:\users\derik\desktop\midproject\midproject\debug\ground.obj
+c:\users\derik\desktop\midproject\midproject\debug\mazeblocks.obj
+c:\users\derik\desktop\midproject\midproject\debug\mazegenerator.obj
+c:\users\derik\desktop\midproject\midproject\debug\skybox.obj
 c:\users\derik\desktop\midproject\debug\midproject.pdb
 c:\users\derik\desktop\midproject\midproject\debug\midproject.tlog\cl.command.1.tlog
 c:\users\derik\desktop\midproject\midproject\debug\midproject.tlog\cl.read.1.tlog
@@ -19,12 +21,6 @@ c:\users\derik\desktop\midproject\midproject\debug\midproject.tlog\link-cvtres.r
 c:\users\derik\desktop\midproject\midproject\debug\midproject.tlog\link-cvtres.write.1.tlog
 c:\users\derik\desktop\midproject\midproject\debug\midproject.tlog\link-rc.read.1.tlog
 c:\users\derik\desktop\midproject\midproject\debug\midproject.tlog\link-rc.write.1.tlog
-c:\users\derik\desktop\midproject\midproject\debug\midproject.tlog\link.7968-cvtres.read.1.tlog
-c:\users\derik\desktop\midproject\midproject\debug\midproject.tlog\link.7968-cvtres.write.1.tlog
-c:\users\derik\desktop\midproject\midproject\debug\midproject.tlog\link.7968-rc.read.1.tlog
-c:\users\derik\desktop\midproject\midproject\debug\midproject.tlog\link.7968-rc.write.1.tlog
-c:\users\derik\desktop\midproject\midproject\debug\midproject.tlog\link.7968.read.1.tlog
-c:\users\derik\desktop\midproject\midproject\debug\midproject.tlog\link.7968.write.1.tlog
 c:\users\derik\desktop\midproject\midproject\debug\midproject.tlog\link.command.1.tlog
 c:\users\derik\desktop\midproject\midproject\debug\midproject.tlog\link.read.1.tlog
 c:\users\derik\desktop\midproject\midproject\debug\midproject.tlog\link.write.1.tlog

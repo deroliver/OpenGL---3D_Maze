@@ -18,29 +18,29 @@ public:
 	Camera();
 
 	// Sets and returns a persective matrix built from the field of view, aspect, and near/far planes
-	mat4 SetPersepective(float fov, float aspect, float near, float far);
+	glm::mat4 SetPersepective(float fov, float aspect, float near, float far);
 
 	// Builds and returns a rotation matrix from the yaw and pitch rotations
-	mat4 GetRotationMat();
+	glm::mat4 GetRotationMat();
 
 	// Returns Projection Matrix
-	mat4 GetProjMat() { return Proj_Mat; }
+	glm::mat4 GetProjMat() { return Proj_Mat; }
 
 	// Returns the current view matrix according to the camera's position and rotation
-	mat4 GetViewMat();
+	glm::mat4 GetViewMat();
 
 	// Sets and gets the camera's position
-	void SetPosition(vec3 pos) { Position = pos; }
-	vec3 GetPosition() { return Position;  }
+	void SetPosition(glm::vec3 pos) { Position = pos; }
+	glm::vec3 GetPosition() { return Position; }
 
 	// Calculates the current view from position and rotation matrix
-	vec3 GetView();
+	glm::vec3 GetView();
 
 	// Returns camera's up vector
-	vec3 GetUp();
+	glm::vec3 GetUp();
 
 	// Returns the camera's right vector - Perpendicular to the view and up vectors
-	vec3 GetRight();
+	glm::vec3 GetRight();
 
 
 
@@ -73,9 +73,9 @@ public:
 	void Strafe(float speed);
 
 protected:
-	mat4 Proj_Mat;
+	glm::mat4 Proj_Mat;
 
-	vec3 Position;
+	glm::vec3 Position;
 
 	float Speed = 25.0;
 	float RotationSpeed = 2.0;

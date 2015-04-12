@@ -13,5 +13,6 @@ out vec3 R;
 void main(void)
 {
 	gl_Position = Proj_Mat * View_Mat * Mode_Mat * In_Pos;
-	R = Normal.xyz;
+
+	R = vec3(Normal.x, Normal.y, Normal.z);
 }

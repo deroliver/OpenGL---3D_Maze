@@ -91,13 +91,11 @@
     <ClInclude Include="Ground.h" />
     <ClInclude Include="InputManager.h" />
     <ClInclude Include="MazeBlocks.h" />
-    <ClInclude Include="MazeGenerator.h" />
     <ClInclude Include="ShaderManager.h" />
     <ClInclude Include="SkyBox.h" />
     <ClInclude Include="Source.h" />
     <ClInclude Include="Texture.h" />
     <ClInclude Include="TimeManager.h" />
-    <ClInclude Include="Wall.h" />
     <ClInclude Include="WindowManager.h" />
   </ItemGroup>
   <ItemGroup>
@@ -108,19 +106,19 @@
     <ClCompile Include="InputManager.cpp" />
     <ClCompile Include="LoadBitmap.cpp" />
     <ClCompile Include="MazeBlocks.cpp" />
-    <ClCompile Include="MazeGenerator.cpp" />
     <ClCompile Include="MyLoadBitmap.cpp" />
     <ClCompile Include="ShaderManager.cpp" />
+    <ClCompile Include="SkyBox.cpp" />
     <ClCompile Include="Source.cpp" />
     <ClCompile Include="TimeManager.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Shader.Frag" />
-    <None Include="Shader.FragNorm" />
-    <None Include="Shader.FragText" />
-    <None Include="Shader.Vert" />
-    <None Include="Shader.VertNorm" />
-    <None Include="Shader.VertText" />
+    <None Include="Shaders\Shader.Frag" />
+    <None Include="Shaders\Shader.FragNorm" />
+    <None Include="Shaders\Shader.FragText" />
+    <None Include="Shaders\Shader.Vert" />
+    <None Include="Shaders\Shader.VertNorm" />
+    <None Include="Shaders\Shader.VertText" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

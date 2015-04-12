@@ -14,7 +14,7 @@
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
     <Filter Include="Shaders">
-      <UniqueIdentifier>{f5073534-477c-46f9-a80f-735910a6b4b5}</UniqueIdentifier>
+      <UniqueIdentifier>{aa9bca0a-b8e9-4389-bb72-198cfef0352f}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -51,16 +51,10 @@
     <ClInclude Include="Texture.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Wall.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="MazeBlocks.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="SkyBox.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="MazeGenerator.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
@@ -98,27 +92,27 @@
     <ClCompile Include="MazeBlocks.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="MazeGenerator.cpp">
+    <ClCompile Include="SkyBox.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <None Include="Shader.VertText">
+    <None Include="Shaders\Shader.FragText">
       <Filter>Shaders</Filter>
     </None>
-    <None Include="Shader.Frag">
+    <None Include="Shaders\Shader.Vert">
       <Filter>Shaders</Filter>
     </None>
-    <None Include="Shader.FragNorm">
+    <None Include="Shaders\Shader.VertNorm">
       <Filter>Shaders</Filter>
     </None>
-    <None Include="Shader.FragText">
+    <None Include="Shaders\Shader.VertText">
       <Filter>Shaders</Filter>
     </None>
-    <None Include="Shader.Vert">
+    <None Include="Shaders\Shader.Frag">
       <Filter>Shaders</Filter>
     </None>
-    <None Include="Shader.VertNorm">
+    <None Include="Shaders\Shader.FragNorm">
       <Filter>Shaders</Filter>
     </None>
   </ItemGroup>

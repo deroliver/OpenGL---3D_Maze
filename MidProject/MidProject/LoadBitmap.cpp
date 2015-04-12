@@ -10,6 +10,7 @@ using namespace std;
 #include "Angel.h"
 #include <GL/glew.h> // for OpenGL extensions
 #include <GL/glut.h> // for Glut utility kit
+#include "GraphicsObject.h"
 
 #define GL_CHECK_ERRORS \
 { \
@@ -35,10 +36,8 @@ using namespace std;
  *
  *********************************************************/
 
-
-int MyLoadCubeMapBitmap(char *filename, GLenum  target ) 
+int MyLoadCubeMapBitmap(char *filename, GLenum  target) 
 {
-	GLuint texture_num = -1;
     int i, j=0; //Index variables
     FILE *l_file; //File pointer
     unsigned char *l_texture; //The pointer to the memory zone in which we will load the texture
@@ -48,7 +47,7 @@ int MyLoadCubeMapBitmap(char *filename, GLenum  target )
     BITMAPINFOHEADER infoheader;
     RGBTRIPLE rgb;
 
-    texture_num++; // The counter of the current texture is increased
+	texture_num++; // The counter of the current texture is increased
 
     if( (l_file = fopen(filename, "rb"))==NULL) return (-1); // Open the file for reading
     int sword = sizeof(WORD);
@@ -112,5 +111,5 @@ int MyLoadCubeMapBitmap(char *filename, GLenum  target )
 
     free(l_texture); // Free the memory we used to load the texture
 
-    return (texture_num); // Returns the current texture OpenGL ID
+	return (texture_num); // Returns the current texture OpenGL ID
 }

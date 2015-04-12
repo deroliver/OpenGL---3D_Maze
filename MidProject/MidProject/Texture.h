@@ -6,7 +6,7 @@
 *********************************************************/
 
 // Counter to keep track of the last loaded texture
-extern int num_texture;
+extern int texture_num;
 
 
 

@@ -19,11 +19,16 @@ class Vertex3 {
 public:
 
 	Vertex3() {}
-	Vertex3(vec3 v1, vec4 v2) : xyz(v1), rgba(v2) {}
-	vec3 xyz;
-	vec4 rgba;
-	vec2 tex;
+	Vertex3(glm::vec3 v1, glm::vec4 v2) : xyz(v1), rgba(v2) {}
+	glm::vec3 xyz;
+	glm::vec4 rgba;
+	glm::vec2 tex;
+	glm::vec3 norm;
 };
+
+#define vec4to3( v ) vec3(v.x,v.y,v.z)
+
+
 
 // Handles initializing, rendering, and destroying a 3D object
 class GraphicsObject {
@@ -36,11 +41,11 @@ public:
 	static const GLuint TextureIndex = 2;		// For the u,v texture coordinates
 	static const GLuint NormalIndex = 3;		// For the x,y,z normals
 	
-	int texture_num = GL_TEXTURE1;
+	//int texture_num = GL_TEXTURE1;
 	
 	// Scale of model is set to 100% by default
 	// This_Texture is initialized
-	GraphicsObject() { Scale = vec3(1.0f, 1.0f, 1.0f); This_Texture = texture_num++; }
+	GraphicsObject();
 	~GraphicsObject() { Destroy(); }
 
 	// Uses the data passed to initialize VBO and VAO, and location of the vertex/fragment shaders
@@ -50,16 +55,16 @@ public:
 	void Render();
 
 	// Setter + Getter function for position
-	vec3 GetPosition() { return Position; }
-	void SetPosition(vec3 pos) { Position = pos; }
+	glm::vec3 GetPosition() { return Position; }
+	void SetPosition(glm::vec3 pos) { Position = pos; }
 
 	// Setter + Getter function for rotation
-	vec3 GetRotation() { return Rotation; }
-	void SetRotation(vec3 rot) { Rotation = rot; }
+	glm::vec3 GetRotation() { return Rotation; }
+	void SetRotation(glm::vec3 rot) { Rotation = rot; }
 
 	// Setter + Getter function for scale
-	vec3 GetScale() { return Scale; }
-	void SetScale(vec3 scal) { Scale = scal; }
+	glm::vec3 GetScale() { return Scale; }
+	void SetScale(glm::vec3 scal) { Scale = scal; }
 
 	// Setter + Getter function for the camera
 	Camera *GetCamera() { return Camera; }
@@ -82,9 +87,9 @@ protected:
 	GLuint texID;
 	GLuint This_Texture;
 
-	vec3 Position;						// Object's position
-	vec3 Rotation;						// Object's rotation
-	vec3 Scale;							// Object's scale
+	glm::vec3 Position;						// Object's position
+	glm::vec3 Rotation;						// Object's rotation
+	glm::vec3 Scale;							// Object's scale
 		
 	ShaderManager Shader;						// Shader object to initialize + run shaders
 

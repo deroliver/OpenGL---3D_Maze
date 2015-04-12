@@ -1,5 +1,10 @@
 #include "GraphicsObject.h"
 
+int texture_num = GL_TEXTURE1;
+
+GraphicsObject::GraphicsObject() {
+	Scale = vec3(1.0f, 1.0f, 1.0f); This_Texture = texture_num++;
+}
 
 void GraphicsObject::Initialize(Vertex3 vertices[], int vLength, std::string VertexShader, std::string FragmentShader) {
 
