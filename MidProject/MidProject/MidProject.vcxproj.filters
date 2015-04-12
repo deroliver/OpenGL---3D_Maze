@@ -54,7 +54,13 @@
     <ClInclude Include="Wall.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="MazeBlock.h">
+    <ClInclude Include="MazeBlocks.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="SkyBox.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="MazeGenerator.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
@@ -83,19 +89,37 @@
     <ClCompile Include="MyLoadBitmap.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="LoadBitmap.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Ground.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="MazeBlocks.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="MazeGenerator.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <None Include="Shader.Frag">
-      <Filter>Source Files</Filter>
+    <None Include="Shader.VertText">
+      <Filter>Shaders</Filter>
     </None>
-    <None Include="Shader.Vert">
-      <Filter>Source Files</Filter>
+    <None Include="Shader.Frag">
+      <Filter>Shaders</Filter>
+    </None>
+    <None Include="Shader.FragNorm">
+      <Filter>Shaders</Filter>
     </None>
     <None Include="Shader.FragText">
-      <Filter>Source Files</Filter>
+      <Filter>Shaders</Filter>
     </None>
-    <None Include="Shader.VertText">
-      <Filter>Source Files</Filter>
+    <None Include="Shader.Vert">
+      <Filter>Shaders</Filter>
+    </None>
+    <None Include="Shader.VertNorm">
+      <Filter>Shaders</Filter>
     </None>
   </ItemGroup>
 </Project>

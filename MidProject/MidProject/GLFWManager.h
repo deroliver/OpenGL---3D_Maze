@@ -1,11 +1,13 @@
 #ifndef GLFWMANAGER_H_
 #define GLFWMANAGER_H_
+
 #define GLM_FORCE_RADIANS	
 
 #include <string>
 #include <fstream>
+#include "GL\glew.h"
 #include "GLFW\glfw3.h"
-#include "WindowManager.h"
+#include "Source.h"
 
 
 class GLFWManager : public WindowManager {
@@ -13,7 +15,7 @@ class GLFWManager : public WindowManager {
 public:
 
 	// Create empty constructor and have the destructor release memory
-	GLFWManager() { }
+	GLFWManager() {}
 	~GLFWManager() { Destroy(); }
 
 	// Initializes the window and created the OpenGL context

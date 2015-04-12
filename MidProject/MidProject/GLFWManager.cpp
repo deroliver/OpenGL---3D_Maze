@@ -1,6 +1,4 @@
-#include "GL\glew.h"
 #include "GLFWManager.h"
-#include "Source.h"
 
 
 int main() {

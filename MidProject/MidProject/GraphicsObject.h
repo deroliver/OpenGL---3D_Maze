@@ -6,22 +6,18 @@
 
 #include <stdio.h>
 #include <stdlib.h>
-#include "GL\glew.h"
-#include "glm\glm.hpp"									// Used for the GLM math library
-#include <glm/gtc/matrix_transform.hpp>					// Used for the GLM math library
-#include <glm/gtx/transform2.hpp>						// Used for the GLM math library
+#include "GL\glew.h"					// Used for the GLM math library
 #include "ShaderManager.h"
 #include "Camera.h"
 #include "Texture.h"
 
 using namespace glm;
 
-//static int texture_num = GL_TEXTURE1;
 
 // Used to store attributes for a vertex
 class Vertex3 {
-
 public:
+
 	Vertex3() {}
 	Vertex3(vec3 v1, vec4 v2) : xyz(v1), rgba(v2) {}
 	vec3 xyz;
@@ -39,9 +35,12 @@ public:
 	static const GLuint ColorIndex = 1;			// For the r,g,b,a colors
 	static const GLuint TextureIndex = 2;		// For the u,v texture coordinates
 	static const GLuint NormalIndex = 3;		// For the x,y,z normals
-
+	
+	int texture_num = GL_TEXTURE1;
+	
 	// Scale of model is set to 100% by default
-	GraphicsObject() { Scale = vec3(1.0f, 1.0f, 1.0f); }
+	// This_Texture is initialized
+	GraphicsObject() { Scale = vec3(1.0f, 1.0f, 1.0f); This_Texture = texture_num++; }
 	~GraphicsObject() { Destroy(); }
 
 	// Uses the data passed to initialize VBO and VAO, and location of the vertex/fragment shaders
@@ -72,6 +71,7 @@ public:
 protected:
 
 	Vertex3 *Vertices;					// The list of vertices for this object
+	Vertex3 *Normal; 
 
 	GLint VerticesLength;				// The length of the list of vertices
 
@@ -80,6 +80,7 @@ protected:
 
 	GLuint TexBufferID;
 	GLuint texID;
+	GLuint This_Texture;
 
 	vec3 Position;						// Object's position
 	vec3 Rotation;						// Object's rotation

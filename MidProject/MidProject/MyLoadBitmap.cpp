@@ -15,14 +15,14 @@ using namespace std;
 #define GL_CHECK_ERRORS \
 { \
 	int err=glGetError(); \
-	if (err!= 0) \
+	if (err!=0) \
 	{   cout << "OpenGL Error: " << err << endl; \
 		assert(err == GL_NO_ERROR); \
 	} \
 }
 #endif
 
-GLuint num_texture = -1;
+GLuint texture_num = -1;
 
 /**********************************************************
  *
@@ -43,7 +43,7 @@ int MyLoadBitmap(char *filename, GLenum  target, bool AlphaBlend = false )
     BITMAPINFOHEADER infoheader;
     RGBTRIPLE rgb;
 	
-	glGenTextures( 1, &num_texture );
+	texture_num++; // The counter of the current texture is increased
     
 	if( (l_file = fopen(filename, "rb"))==NULL) return (-1); // Open the file for reading
     
@@ -79,7 +79,7 @@ int MyLoadBitmap(char *filename, GLenum  target, bool AlphaBlend = false )
      
 	GL_CHECK_ERRORS
 
-    glBindTexture(target, num_texture); // Bind the ID texture specified by the 2nd parameter
+    //glBindTexture(target, num_texture); // Bind the ID texture specified by the 2nd parameter
 
 	GL_CHECK_ERRORS
 
@@ -107,5 +107,5 @@ int MyLoadBitmap(char *filename, GLenum  target, bool AlphaBlend = false )
 
     free(l_texture); // Free the memory we used to load the texture
 
-    return (num_texture); // Returns the current texture OpenGL ID
+    return (texture_num); // Returns the current texture OpenGL ID
 }

@@ -1,12 +1,8 @@
 #ifndef SOURCE_H_
 #define SOURCE_H_
 
-#include "TimeManager.h"
 #include "Camera.h"
-#include "InputManager.h"
 #include "WindowManager.h"
-#include "GraphicsObject.h"
-
 
 class Source {
 
@@ -33,8 +29,6 @@ public:
 	void GameLoop();
 
 	void Destroy();
-
-
 
 protected:
 

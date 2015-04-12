@@ -1,10 +1,19 @@
 #include <iostream>
+
+#include "GL\glew.h"
+
 #include "Source.h"
+#include "Texture.h"
+#include "GraphicsObject.h"
+#include "TimeManager.h"
 #include "Ground.h"
 #include "Wall.h"
-#include "Texture.h"
+#include "MazeBlocks.h"
+//#include "Skybox.h"
 
-Ground Ground_1(300);
+Ground Ground_1(486);
+MazeBlocks Maze(16000);
+//SkyBox Skybox(36);
 
 int Source::Main() {
 
@@ -30,12 +39,19 @@ void Source::Initialize() {
 	// Tells OpenGl we want depth testing so it renders the order correctly
 	glEnable(GL_DEPTH_TEST);
 
-	Ground_1.Initialize(Ground_1.vertices, 300, "Shader.VertText", "Shader.FragText");
+	Ground_1.Initialize(Ground_1.vertices, 486, "Shaders/Shader.VertText", "Shaders/Shader.FragText");
+	Maze.Initialize(Maze.vertices, 16000, "Shaders/Shader.Vert", "Shaders/Shader.Frag");
 
 	// Create the projection matrix for our camera and make the near field closer and the far field farther
 	Camera->SetPersepective(radians(60.0f), ScreenWidth / (float)ScreenHeight, 0.01f, 1000);
 
-	Camera->PositionCamera(0, 0, 6, 0, 0);
+	Camera->PositionCamera(0, 70, -10, 0, 0);
+
+	//Skybox.SetCamera(Camera);
+	//Skybox.SetPosition(vec3(0, 0, 0));
+
+	Maze.SetCamera(Camera);
+	Maze.SetPosition(vec3(-7, 0, -7));
 
 	Ground_1.SetCamera(Camera);
 	Ground_1.SetPosition(vec3(0, 0, 0));
@@ -50,9 +66,9 @@ void Source::GameLoop() {
 
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
+	//	Skybox.Render();
 		Ground_1.Render();
-
-		//TimeManager::Instance().Sleep(1);
+		Maze.Render();
 
 		WindowManager->SwapTheBuffers();
 	}

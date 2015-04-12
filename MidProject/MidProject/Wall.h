@@ -3,28 +3,97 @@
 
 #include "GraphicsObject.h"
 
+const Vertex3 WallBlock1[8] = {
+	// Front Face
+	Vertex3(vec3(-10.0,  -5.0, 0.0), vec4(1, 1, 1, 1)),
+	Vertex3(vec3(-10.0,  20.0, 0.0), vec4(1, 1, 1, 1)),
+	Vertex3(vec3( 80.0,  20.0, 0.0), vec4(1, 1, 1, 1)),
+	Vertex3(vec3( 80.0,  -5.0, 0.0), vec4(1, 1, 1, 1)),
+
+	// Rear Face
+	Vertex3(vec3(-10.0,  -5.0, 1.0), vec4(1, 1, 1, 1)),
+	Vertex3(vec3(-10.0,  20.0, 1.0), vec4(1, 1, 1, 1)),
+	Vertex3(vec3( 80.0,  20.0, 1.0), vec4(1, 1, 1, 1)),
+	Vertex3(vec3( 80.0,  -5.0, 1.0), vec4(1, 1, 1, 1))
+};
+
+
+const Vertex3 WallBlock2[8] = {
+	// Front Face
+	Vertex3(vec3(-10.0, -5.0, 0.0), vec4(1, 1, 1, 1)),
+	Vertex3(vec3(-10.0, 20.0, 0.0), vec4(1, 1, 1, 1)),
+	Vertex3(vec3(  1.0, 20.0, 0.0), vec4(1, 1, 1, 1)),
+	Vertex3(vec3(  1.0, -5.0, 0.0), vec4(1, 1, 1, 1)),
+
+	// Rear Face
+	Vertex3(vec3(-10.0, -5.0, 80.0), vec4(1, 1, 1, 1)),
+	Vertex3(vec3(-10.0, 20.0, 80.0), vec4(1, 1, 1, 1)),
+	Vertex3(vec3(1.0,  20.0, 80.0), vec4(1, 1, 1, 1)),
+	Vertex3(vec3(1.0, -5.0, 80.0), vec4(1, 1, 1, 1))
+};
+
 
 class Wall : public GraphicsObject {
 public:
-	Vertex3 vertices[1200];
+	Vertex3 vertices[36];
 	int Index = 0;
 
-	Wall(int length) {
+	Wall(int length, bool D) {
 		VerticesLength = length;
+		if (D = true) {
+			Face1(1, 0, 3, 2, 0, 0);
+			Face1(2, 3, 7, 6, 0, 0);
+			Face1(3, 0, 4, 7, 0, 0);
+			Face1(6, 5, 1, 2, 0, 0);
+			Face1(4, 5, 6, 7, 0, 0);
+			Face1(5, 4, 0, 1, 0, 0);
+		}
+		else {
+			Face2(1, 0, 3, 2, 0, 0);
+			Face2(2, 3, 7, 6, 0, 0);
+			Face2(3, 0, 4, 7, 0, 0);
+			Face2(6, 5, 1, 2, 0, 0);
+			Face2(4, 5, 6, 7, 0, 0);
+			Face2(5, 4, 0, 1, 0, 0);
+		}
+
+	}
+
+	void Face1(int a, int b, int c, int d, int xOff, int yOff)  {
+		// First triangle of the face
+		vertices[Index].rgba = vec4(1, 1, 1, 1); vertices[Index].xyz = WallBlock1[a].xyz + vec3(xOff, 0, yOff); Index++;
+		vertices[Index].rgba = vec4(1, 1, 1, 1); vertices[Index].xyz = WallBlock1[b].xyz + vec3(xOff, 0, yOff); Index++;
+		vertices[Index].rgba = vec4(1, 1, 1, 1); vertices[Index].xyz = WallBlock1[c].xyz + vec3(xOff, 0, yOff); Index++;
+
+		// Second triangle of the face
+		vertices[Index].rgba = vec4(1, 1, 1, 1); vertices[Index].xyz = WallBlock1[a].xyz + vec3(xOff, 0, yOff); Index++;
+		vertices[Index].rgba = vec4(1, 1, 1, 1); vertices[Index].xyz = WallBlock1[c].xyz + vec3(xOff, 0, yOff); Index++;
+		vertices[Index].rgba = vec4(1, 1, 1, 1); vertices[Index].xyz = WallBlock1[d].xyz + vec3(xOff, 0, yOff); Index++;
 	}
 
 
+	void Face2(int a, int b, int c, int d, int xOff, int yOff)  {
+		// First triangle of the face
+		vertices[Index].rgba = vec4(1, 1, 1, 1); vertices[Index].xyz = WallBlock2[a].xyz + vec3(xOff, 0, yOff); Index++;
+		vertices[Index].rgba = vec4(1, 1, 1, 1); vertices[Index].xyz = WallBlock2[b].xyz + vec3(xOff, 0, yOff); Index++;
+		vertices[Index].rgba = vec4(1, 1, 1, 1); vertices[Index].xyz = WallBlock2[c].xyz + vec3(xOff, 0, yOff); Index++;
+
+		// Second triangle of the face
+		vertices[Index].rgba = vec4(1, 1, 1, 1); vertices[Index].xyz = WallBlock2[a].xyz + vec3(xOff, 0, yOff); Index++;
+		vertices[Index].rgba = vec4(1, 1, 1, 1); vertices[Index].xyz = WallBlock2[c].xyz + vec3(xOff, 0, yOff); Index++;
+		vertices[Index].rgba = vec4(1, 1, 1, 1); vertices[Index].xyz = WallBlock2[d].xyz + vec3(xOff, 0, yOff); Index++;
+	}
 
 	void Render() {
 
 		Shader.TurnOn();
 
-		glGenTextures(1, &TexBufferID);
-		glBindTexture(GL_TEXTURE_2D, TexBufferID);
+		//glGenTextures(1, &TexBufferID);
+		//glBindTexture(GL_TEXTURE_2D, TexBufferID);
 
-		GLint IDT = MyLoadBitmap("Brick.bmp", GL_TEXTURE_2D, true);
-		texID = Shader.GetVariable("texMap");
-		Shader.SetInt(texID, 0);
+		//GLint IDT = MyLoadBitmap("Brick.bmp", GL_TEXTURE_2D, true);
+		//texID = Shader.GetVariable("texMap");
+		//Shader.SetInt(texID, 0);
 
 		mat4 Proj_Mat = Camera->GetProjMat();
 		mat4 View_Mat = Camera->GetViewMat();
@@ -56,7 +125,7 @@ public:
 		glEnableVertexAttribArray(ColorIndex);
 
 
-		glEnableVertexAttribArray(TextureIndex);
+		//glEnableVertexAttribArray(TextureIndex);
 
 		// Draw triangles from VBO
 		glDrawArrays(GL_TRIANGLES, 0, VerticesLength);
@@ -102,7 +171,7 @@ public:
 		// Add color attributes to VAO and VBO
 		glVertexAttribPointer(ColorIndex, 4, GL_FLOAT, GL_FALSE, sizeof(Vertices[0]), (GLvoid*)sizeof(Vertices[0].xyz));
 
-		glVertexAttribPointer(TextureIndex, 2, GL_FLOAT, GL_FALSE, sizeof(Vertices[0]), (GLvoid*)(sizeof(Vertices[0].xyz) + sizeof(Vertices[0].rgba)));
+		//glVertexAttribPointer(TextureIndex, 2, GL_FLOAT, GL_FALSE, sizeof(Vertices[0]), (GLvoid*)(sizeof(Vertices[0].xyz) + sizeof(Vertices[0].rgba)));
 
 		// Check for errors
 		ErrorCheckValue = glGetError();

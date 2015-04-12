@@ -1,0 +1,10 @@
+#version 330
+
+in vec3 R;
+uniform samplerCube texMap;
+out vec4 Frag_Color;
+
+void main()
+{
+    Frag_Color =  texture(texMap, R);
+}

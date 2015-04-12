@@ -90,8 +90,10 @@
     <ClInclude Include="GraphicsObject.h" />
     <ClInclude Include="Ground.h" />
     <ClInclude Include="InputManager.h" />
-    <ClInclude Include="MazeBlock.h" />
+    <ClInclude Include="MazeBlocks.h" />
+    <ClInclude Include="MazeGenerator.h" />
     <ClInclude Include="ShaderManager.h" />
+    <ClInclude Include="SkyBox.h" />
     <ClInclude Include="Source.h" />
     <ClInclude Include="Texture.h" />
     <ClInclude Include="TimeManager.h" />
@@ -102,7 +104,11 @@
     <ClCompile Include="Camera.cpp" />
     <ClCompile Include="GLFWManager.cpp" />
     <ClCompile Include="GraphicsObject.cpp" />
+    <ClCompile Include="Ground.cpp" />
     <ClCompile Include="InputManager.cpp" />
+    <ClCompile Include="LoadBitmap.cpp" />
+    <ClCompile Include="MazeBlocks.cpp" />
+    <ClCompile Include="MazeGenerator.cpp" />
     <ClCompile Include="MyLoadBitmap.cpp" />
     <ClCompile Include="ShaderManager.cpp" />
     <ClCompile Include="Source.cpp" />
@@ -110,8 +116,10 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Shader.Frag" />
+    <None Include="Shader.FragNorm" />
     <None Include="Shader.FragText" />
     <None Include="Shader.Vert" />
+    <None Include="Shader.VertNorm" />
     <None Include="Shader.VertText" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

@@ -77,7 +77,7 @@ protected:
 
 	vec3 Position;
 
-	float Speed = 5.0;
+	float Speed = 25.0;
 	float RotationSpeed = 2.0;
 	float Yaw = 0.0;
 	float Pitch = 0.0;
