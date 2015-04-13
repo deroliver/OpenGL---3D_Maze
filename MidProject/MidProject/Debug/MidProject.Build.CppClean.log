@@ -1,7 +1,6 @@
 c:\users\derik\desktop\midproject\midproject\debug\vc120.pdb
 c:\users\derik\desktop\midproject\midproject\debug\vc120.idb
 c:\users\derik\desktop\midproject\midproject\debug\camera.obj
-c:\users\derik\desktop\midproject\midproject\debug\glfwmanager.obj
 c:\users\derik\desktop\midproject\midproject\debug\graphicsobject.obj
 c:\users\derik\desktop\midproject\midproject\debug\ground.obj
 c:\users\derik\desktop\midproject\midproject\debug\inputmanager.obj
@@ -9,9 +8,10 @@ c:\users\derik\desktop\midproject\midproject\debug\loadbitmap.obj
 c:\users\derik\desktop\midproject\midproject\debug\mazeblocks.obj
 c:\users\derik\desktop\midproject\midproject\debug\myloadbitmap.obj
 c:\users\derik\desktop\midproject\midproject\debug\shadermanager.obj
-c:\users\derik\desktop\midproject\midproject\debug\timemanager.obj
 c:\users\derik\desktop\midproject\midproject\debug\skybox.obj
+c:\users\derik\desktop\midproject\midproject\debug\timemanager.obj
 c:\users\derik\desktop\midproject\midproject\debug\source.obj
+c:\users\derik\desktop\midproject\midproject\debug\glfwmanager.obj
 c:\users\derik\desktop\midproject\debug\midproject.ilk
 c:\users\derik\desktop\midproject\debug\midproject.exe
 c:\users\derik\desktop\midproject\debug\midproject.pdb

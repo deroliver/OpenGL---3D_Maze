@@ -103,7 +103,6 @@ void Camera::MoveCamera(float speed) {
 
 	if (Position.z < -68.0)
 		Position.z = -68.0;
-	
 }
 
 
@@ -129,7 +128,6 @@ void Camera::Strafe(float speed) {
 
 	if (Position.z < -68.0)
 		Position.z = -68.0;
-
 }
 
 

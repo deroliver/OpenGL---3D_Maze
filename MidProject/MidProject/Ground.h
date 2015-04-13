@@ -13,7 +13,7 @@ const Vertex3 Quad[4] = { Vertex3(vec3(-10.0, -5.0,  0.0), vec4(0 , 0, 0, 1)),
 class Ground : public GraphicsObject {
 public:
 	// Holds vertex information for the vertices
-	Vertex3 vertices[2500];
+	Vertex3 vertices[2166];
 	int Index = 0;
 
 	// Constructor, sets the VerticesLength

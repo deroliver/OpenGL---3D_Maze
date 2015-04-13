@@ -3,9 +3,13 @@
 std::random_device rd;
 std::mt19937 Gen(rd());
 std::uniform_int_distribution<> Random(1, 4);
+std::uniform_int_distribution<> EndRand(2, 16);
 
 // Constructor to initialize the maze
 MazeBlocks::MazeBlocks(int length) : GraphicsObject() {
+
+	End.X = EndRand(Gen);
+	End.Y = EndRand(Gen);
 
 	// Initializes the maze
 	InitMaze();
@@ -16,10 +20,17 @@ MazeBlocks::MazeBlocks(int length) : GraphicsObject() {
 	// Draws the walls facing the Vertically
 	for (int i = 1; i <= 17; i++) {
 		for (int j = 1; j <= 18; j++) {
-
+			// Sets up the end block
+			if (i == End.X && j == End.Y) {
+				FaceEnd(1, 0, 3, 2, 10 * i, 10 * j);
+				FaceEnd(2, 3, 7, 6, 10 * i, 10 * j);
+				FaceEnd(3, 0, 4, 7, 10 * i, 10 * j);
+				FaceEnd(6, 5, 1, 2, 10 * i, 10 * j);
+				FaceEnd(4, 5, 6, 7, 10 * i, 10 * j);
+				FaceEnd(5, 4, 0, 1, 10 * i, 10 * j);
+			}
 			// If DrawY is true at the specified point in the array
 			if (Maze[i][j].DrawY) {
-
 				// Create a wall
 				Face(1, 0, 3, 2, 10 * i, 10 * j);
 				Face(2, 3, 7, 6, 10 * i, 10 * j);
@@ -27,6 +38,7 @@ MazeBlocks::MazeBlocks(int length) : GraphicsObject() {
 				Face(6, 5, 1, 2, 10 * i, 10 * j);
 				Face(4, 5, 6, 7, 10 * i, 10 * j);
 				Face(5, 4, 0, 1, 10 * i, 10 * j);
+				CreateRect(10 * i, 10 * j);
 			}
 		}
 	}
@@ -34,9 +46,17 @@ MazeBlocks::MazeBlocks(int length) : GraphicsObject() {
 	// Draws the walls facing the Vertically
 	for (int i = 1; i <= 18; i++) {
 		for (int j = 1; j <= 17; j++) {
+			// Sets up the end block
+			if (i == End.X && j == End.Y) {
+				FaceEnd(1, 0, 3, 2, 10 * i, 10 * j);
+				FaceEnd(2, 3, 7, 6, 10 * i, 10 * j);
+				FaceEnd(3, 0, 4, 7, 10 * i, 10 * j);
+				FaceEnd(6, 5, 1, 2, 10 * i, 10 * j);
+				FaceEnd(4, 5, 6, 7, 10 * i, 10 * j);
+				FaceEnd(5, 4, 0, 1, 10 * i, 10 * j);
+			}
 			// If DrawX is true at the specified point in the array
 			if (Maze[i][j].DrawX){
-
 				// Create a wall
 				Face2(1, 0, 3, 2, 10 * i, 10 * j);
 				Face2(2, 3, 7, 6, 10 * i, 10 * j);
@@ -49,12 +69,38 @@ MazeBlocks::MazeBlocks(int length) : GraphicsObject() {
 	}
 }
 
+
+
+void MazeBlocks::Face(int A, int B, int C, int D, int xOff, int zOff) {
+	// First triangle of the face
+	vertices[Index].norm = normalize(Block[A]); vertices[Index].xyz = Block[A] + vec3(xOff, 0, zOff); vertices[Index].tex = vec2(1.0, 0.0); Index++;
+	vertices[Index].norm = normalize(Block[B]); vertices[Index].xyz = Block[B] + vec3(xOff, 0, zOff); vertices[Index].tex = vec2(0.0, 0.0); Index++;
+	vertices[Index].norm = normalize(Block[C]); vertices[Index].xyz = Block[C] + vec3(xOff, 0, zOff); vertices[Index].tex = vec2(0.0, 1.0); Index++;
+
+	// Second triangle of the face
+	vertices[Index].norm = normalize(Block[A]); vertices[Index].xyz = Block[A] + vec3(xOff, 0, zOff); vertices[Index].tex = vec2(1.0, 0.0); Index++;
+	vertices[Index].norm = normalize(Block[B]); vertices[Index].xyz = Block[C] + vec3(xOff, 0, zOff); vertices[Index].tex = vec2(0.0, 1.0); Index++;
+	vertices[Index].norm = normalize(Block[C]); vertices[Index].xyz = Block[D] + vec3(xOff, 0, zOff); vertices[Index].tex = vec2(1.0, 1.0); Index++;
+}
+
+void MazeBlocks::Face2(int A, int B, int C, int D, int xOff, int zOff) {
+	// First triangle of the face
+	vertices[Index].norm = normalize(Block[A]); vertices[Index].xyz = Block2[A] + vec3(xOff, 0, zOff); vertices[Index].tex = vec2(1.0, 0.0); Index++;
+	vertices[Index].norm = normalize(Block[B]); vertices[Index].xyz = Block2[B] + vec3(xOff, 0, zOff); vertices[Index].tex = vec2(0.0, 0.0); Index++;
+	vertices[Index].norm = normalize(Block[C]); vertices[Index].xyz = Block2[C] + vec3(xOff, 0, zOff); vertices[Index].tex = vec2(0.0, 1.0); Index++;
+
+	// Second triangle of the face
+	vertices[Index].norm = normalize(Block[A]); vertices[Index].xyz = Block2[A] + vec3(xOff, 0, zOff); vertices[Index].tex = vec2(1.0, 0.0); Index++;
+	vertices[Index].norm = normalize(Block[B]); vertices[Index].xyz = Block2[C] + vec3(xOff, 0, zOff); vertices[Index].tex = vec2(0.0, 1.0); Index++;
+	vertices[Index].norm = normalize(Block[C]); vertices[Index].xyz = Block2[D] + vec3(xOff, 0, zOff); vertices[Index].tex = vec2(1.0, 1.0); Index++;
+}
+
 // Creates a rectangle object for each rectangle along the wall
 void MazeBlocks::CreateRect(int xOff, int zOff) {
 	Rec rect;
-	rect.X = Block[1].x + xOff + 5.0;
-	rect.Z = Block[1].z + zOff - 0.125;
-	rect.Y = Block[1].y + 10;
+	rect.X = Block[0].x + xOff + 5.0;
+	rect.Z = Block[0].z + zOff - 0.125;
+	rect.Y = Block[0].y + 10;
 
 	Rects.push_back(rect);
 }
@@ -165,37 +211,30 @@ void MazeBlocks::GenerateMaze(int x, int y) {
 		}
 		// If all rooms have been visited - Return
 		if (CheckAll()) {
-			return;
-			Maze[10][10].DrawY = false;
+			return;			
 		}
+
 		// Recursively call function using new (x, y) position
 		GenerateMaze(nX, nY);
 	}
 }
 
-void MazeBlocks::Face(int A, int B, int C, int D, int xOff, int zOff) {
+
+
+
+void MazeBlocks::FaceEnd(int A, int B, int C, int D, int xOff, int zOff) {
+
 	// First triangle of the face
-	vertices[Index].norm = normalize(Block[A]); vertices[Index].xyz = Block[A] + vec3(xOff, 0, zOff); Index++;
-	vertices[Index].norm = normalize(Block[B]); vertices[Index].xyz = Block[B] + vec3(xOff, 0, zOff); Index++;
-	vertices[Index].norm = normalize(Block[C]); vertices[Index].xyz = Block[C] + vec3(xOff, 0, zOff); Index++;
+	vertices[Index].rgba = vec4(1, 0, 0, 1); vertices[Index].xyz = EndBlock[A] + vec3(xOff + 4.0, 0, zOff + 4.0); Index++;
+	vertices[Index].rgba = vec4(1, 0, 0, 1); vertices[Index].xyz = EndBlock[B] + vec3(xOff + 4.0, 0, zOff + 4.0); Index++;
+	vertices[Index].rgba = vec4(1, 0, 0, 1); vertices[Index].xyz = EndBlock[C] + vec3(xOff + 4.0, 0, zOff + 4.0); Index++;
 
 	// Second triangle of the face
-	vertices[Index].norm = normalize(Block[A]); vertices[Index].xyz = Block[A] + vec3(xOff, 0, zOff); Index++;
-	vertices[Index].norm = normalize(Block[B]); vertices[Index].xyz = Block[C] + vec3(xOff, 0, zOff); Index++;
-	vertices[Index].norm = normalize(Block[C]); vertices[Index].xyz = Block[D] + vec3(xOff, 0, zOff); Index++;
+	vertices[Index].rgba = vec4(1, 0, 0, 1); vertices[Index].xyz = EndBlock[A] + vec3(xOff + 4.0, 0, zOff + 4.0); Index++;
+	vertices[Index].rgba = vec4(1, 0, 0, 1); vertices[Index].xyz = EndBlock[C] + vec3(xOff + 4.0, 0, zOff + 4.0); Index++;
+	vertices[Index].rgba = vec4(1, 0, 0, 1); vertices[Index].xyz = EndBlock[D] + vec3(xOff + 4.0, 0, zOff + 4.0); Index++;
 }
 
-void MazeBlocks::Face2(int A, int B, int C, int D, int xOff, int zOff) {
-	// First triangle of the face
-	vertices[Index].norm = normalize(Block[A]); vertices[Index].xyz = Block2[A] + vec3(xOff, 0, zOff); Index++;
-	vertices[Index].norm = normalize(Block[B]); vertices[Index].xyz = Block2[B] + vec3(xOff, 0, zOff); Index++;
-	vertices[Index].norm = normalize(Block[C]); vertices[Index].xyz = Block2[C] + vec3(xOff, 0, zOff); Index++;
-
-	// Second triangle of the face
-	vertices[Index].norm = normalize(Block[A]); vertices[Index].xyz = Block2[A] + vec3(xOff, 0, zOff); Index++;
-	vertices[Index].norm = normalize(Block[B]); vertices[Index].xyz = Block2[C] + vec3(xOff, 0, zOff); Index++;
-	vertices[Index].norm = normalize(Block[C]); vertices[Index].xyz = Block2[D] + vec3(xOff, 0, zOff); Index++;
-}
 
 
 
@@ -204,6 +243,14 @@ void MazeBlocks::Render() {
 
 	// Turns on the shader
 	Shader.TurnOn();
+
+	glEnable(GL_TEXTURE_2D);
+	glActiveTexture(This_Texture);
+	glGenTextures(1, &TexBufferID);
+	glBindTexture(GL_TEXTURE_2D, TexBufferID);
+
+	texID = Shader.GetVariable("texMap");
+	Shader.SetInt(texID, 0);
 
 	// Get the view + projection matrices from the Camera
 	mat4 Proj_Mat = Camera->GetProjMat();
@@ -236,14 +283,12 @@ void MazeBlocks::Render() {
 	// Enable vertex information within shaders
 	glEnableVertexAttribArray(VertexIndex);
 
+	// Enable the texture index
+	glEnableVertexAttribArray(TextureIndex);
+
 	// Enable color information within shaders
 	glEnableVertexAttribArray(ColorIndex);
 
-	// Enable texture information within shaders
-	glEnableVertexAttribArray(TextureIndex);
-
-	// Enable normal information within shaders
-	glEnableVertexAttribArray(NormalIndex);
 
 	// Draw triangles from VBO
 	glDrawArrays(GL_TRIANGLES, 0, VerticesLength);
@@ -256,9 +301,6 @@ void MazeBlocks::Render() {
 
 	// Disable texture index
 	glDisableVertexAttribArray(TextureIndex);
-
-	// Disable normal index
-	glDisableVertexAttribArray(NormalIndex);
 
 	// Reset current VAO to 0
 	glBindVertexArray(0);
@@ -274,6 +316,11 @@ void MazeBlocks::Initialize(Vertex3 vertices[], int length, std::string Vertex, 
 
 	// Create + compile GLSL vertex and fragment shaders
 	Shader.Initialize(Vertex, Frag);
+
+	glActiveTexture(This_Texture);
+
+	// Load the bitmap
+	int IT = MyLoadBitmap("Wall.bmp", GL_TEXTURE_2D, true);
 
 	// Store the vertices and length in member variables
 	Vertices = vertices;
@@ -299,11 +346,9 @@ void MazeBlocks::Initialize(Vertex3 vertices[], int length, std::string Vertex, 
 	// Add color attributes to VAO and VBO
 	glVertexAttribPointer(ColorIndex, 4, GL_FLOAT, GL_FALSE, sizeof(Vertices[0]), (GLvoid*)sizeof(Vertices[0].xyz));
 
-	// Add the texture attributes to VAO and VBO
+	// Add texture attributes to VAO and VBO
 	glVertexAttribPointer(TextureIndex, 2, GL_FLOAT, GL_FALSE, sizeof(Vertices[0]), (GLvoid*)(sizeof(Vertices[0].xyz) + sizeof(Vertices[0].rgba)));
 
-	// Add the normal attributes to VAO and VBO
-	glVertexAttribPointer(NormalIndex, 3, GL_FLOAT, GL_FALSE, sizeof(Vertices[0]), (GLvoid*)(sizeof(Vertices[0].xyz) + sizeof(Vertices[0].rgba) + sizeof(Vertices[0].tex)));
 
 	// Check for errors
 	ErrorCheckValue = glGetError();

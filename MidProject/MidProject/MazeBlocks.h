@@ -64,6 +64,19 @@ const vec3 Block2[8] = {
 	vec3(-10.0, -5.0, 10.0), 
 };
 
+// Vertices for the end block 
+const vec3 EndBlock[8] {
+	vec3(-2.0, 2.0, 2.0),
+		vec3(0.0, 2.0, 2.0),
+		vec3(0.0, 4.0, 2.0),
+		vec3(-2.0, 4.0, 2.0),
+
+		vec3(-2.0, 2.0, 0.0),
+		vec3(0.0, 2.0, 0.0),
+		vec3(0.0, 4.0, 0.0),
+		vec3(-2.0, 4.0, 0.0),
+};
+
 
 
 // Class to create and draw the maze walls
@@ -86,6 +99,9 @@ public:
 	// Stack to hold the positions for the rooms in the maze
 	std::stack<XY> Rooms;
 
+	XY End;
+
+	void FaceEnd(int A, int B, int C, int D, int xOff, int zOff);
 
 	int Index = 0;
 
@@ -103,6 +119,12 @@ public:
 
 	// Checks if all the maze rooms have been visited
 	bool CheckAll();
+
+	// Initialie the texture
+	void InitTexture();
+
+	// Flag to get end of the maze
+	bool first = true;
 
 	// Creates the Horizantal maze walls
 	void Face(int a, int b, int c, int d, int xOff, int yOff);

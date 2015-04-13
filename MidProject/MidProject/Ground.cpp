@@ -33,6 +33,7 @@ void Ground::Render() {
 	glGenTextures(1, &TexBufferID);
 	glBindTexture(GL_TEXTURE_2D, TexBufferID);
 
+	glActiveTexture(This_Texture);
 	texID = Shader.GetVariable("texMap");
 	Shader.SetInt(texID, 0);
 
@@ -77,6 +78,9 @@ void Ground::Render() {
 	// Disable vertex index
 	glDisableVertexAttribArray(VertexIndex);
 
+	// Disable texture index
+	glDisableVertexAttribArray(TextureIndex);
+
 	// Reset current VAO to 0
 	glBindVertexArray(0);
 
@@ -89,6 +93,11 @@ void Ground::Initialize(Vertex3 vertices[], int length, std::string Vertex, std:
 
 	Shader.Initialize(Vertex, Frag);
 
+
+	glGenTextures(1, &TexBufferID);
+	glBindTexture(GL_TEXTURE_2D, TexBufferID);
+
+	glActiveTexture(This_Texture);
 	int IDT = MyLoadBitmap("Brick.bmp", GL_TEXTURE_2D, true);
 
 	// Store the vertices and length in member variables
