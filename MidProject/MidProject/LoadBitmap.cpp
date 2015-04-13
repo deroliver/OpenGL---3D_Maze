@@ -36,6 +36,8 @@ using namespace std;
  *
  *********************************************************/
 
+extern int texture_num;
+
 int MyLoadCubeMapBitmap(char *filename, GLenum  target) 
 {
     int i, j=0; //Index variables

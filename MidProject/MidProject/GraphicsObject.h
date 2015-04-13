@@ -6,12 +6,11 @@
 
 #include <stdio.h>
 #include <stdlib.h>
-#include "GL\glew.h"					// Used for the GLM math library
+#include "GL\glew.h"					
 #include "ShaderManager.h"
 #include "Camera.h"
 #include "Texture.h"
 
-using namespace glm;
 
 
 // Used to store attributes for a vertex
@@ -20,10 +19,10 @@ public:
 
 	Vertex3() {}
 	Vertex3(glm::vec3 v1, glm::vec4 v2) : xyz(v1), rgba(v2) {}
-	glm::vec3 xyz;
-	glm::vec4 rgba;
-	glm::vec2 tex;
-	glm::vec3 norm;
+	glm::vec3 xyz;													// x,y,z Position
+	glm::vec4 rgba;													// r,g,b,a color values
+	glm::vec2 tex;													// Texture coordinate values
+	glm::vec3 norm;													// Normal value
 };
 
 #define vec4to3( v ) vec3(v.x,v.y,v.z)
@@ -44,7 +43,6 @@ public:
 	//int texture_num = GL_TEXTURE1;
 	
 	// Scale of model is set to 100% by default
-	// This_Texture is initialized
 	GraphicsObject();
 	~GraphicsObject() { Destroy(); }
 
@@ -83,15 +81,15 @@ protected:
 	GLuint VertexBufferID;				// The VBO ID stored by the VAO
 	GLuint VertexArrayObjectID;			// The VAO ID to bind		
 
-	GLuint TexBufferID;
-	GLuint texID;
+	GLuint TexBufferID;					// The Texture ID
+	GLuint texID;						
 	GLuint This_Texture;
 
-	glm::vec3 Position;						// Object's position
-	glm::vec3 Rotation;						// Object's rotation
-	glm::vec3 Scale;							// Object's scale
+	glm::vec3 Position;					// Object's position
+	glm::vec3 Rotation;					// Object's rotation
+	glm::vec3 Scale;					// Object's scale
 		
-	ShaderManager Shader;						// Shader object to initialize + run shaders
+	ShaderManager Shader;				// Shader object to initialize + run shaders
 
 	Camera *Camera;						// Add camera in order to access matrices
 };

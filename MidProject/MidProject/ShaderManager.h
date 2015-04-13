@@ -5,11 +5,12 @@
 #include <fstream>
 #include "GL\glew.h"
 
-
+// Shader class used to load and turn on/off shaders
 class ShaderManager {
 
 public:
 
+	// Create an empty constructor and have the deconstructor release our memory.
 	ShaderManager() {}
 	~ShaderManager() { Destroy(); }
 
@@ -37,8 +38,9 @@ public:
 
 
 	void TurnOn()	{ glUseProgram(ShaderProgramID); }
-	void TurnOff()	{ glUseProgram(0); }
+	void TurnOff()	{ glUseProgram(0); glBindVertexArray(0); }
 
+	// Releases memory for the shader
 	void Destroy();
 
 private:

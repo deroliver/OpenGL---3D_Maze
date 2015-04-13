@@ -33,6 +33,7 @@ using namespace std;
  *
  *********************************************************/
 
+extern int texture_num;
 
 int MyLoadBitmap(char *filename, GLenum  target, bool AlphaBlend = false ) 
 {

@@ -1,17 +1,17 @@
 #ifndef CAMERA_H_
 #define CAMERA_H_
 
-#define PI 3.14159265358979323846264338327950288
-#define GLM_FORCE_RADIANS	
+#define PI 3.14159265358979323846264338327950288	// Define PI
+#define GLM_FORCE_RADIANS							// Force GLM to use radians
 
 
 #include <fstream>
-#include <glm\glm.hpp>	
+#include <glm\glm.hpp>						// Using the GLM math library
 #include <glm/gtc/matrix_transform.hpp>					
 #include <glm/gtx/transform2.hpp>
 using namespace glm;
 
-
+// Camera class to manage movement
 class Camera {
 
 public:
@@ -73,16 +73,16 @@ public:
 	void Strafe(float speed);
 
 protected:
-	glm::mat4 Proj_Mat;
+	glm::mat4 Proj_Mat;				// Camera's projection matrix
 
-	glm::vec3 Position;
+	glm::vec3 Position;				// Camera's position	
 
-	float Speed = 25.0;
-	float RotationSpeed = 2.0;
-	float Yaw = 0.0;
-	float Pitch = 0.0;
+	float Speed = 10.0;				// Camera's Speed
+	float RotationSpeed = 2.0;		// Camera's rotation speed
+	float Yaw = 0.0;				// The horizantal rotation angle - Y-Axis
+	float Pitch = 0.0;				// The vertical rotation angle - X-Axis
 
-	double MouseSpeed = 0.001;
+	double MouseSpeed = 0.001;		// Speed for the mouse rotations
 
 
 

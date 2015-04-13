@@ -11,8 +11,8 @@ Ground::Ground(int length) : GraphicsObject() {
 		vertices[5 + i].tex = vec2(0.0, 0.0);
 	}
 
-	for (int i = -20; i <= 60; i += 10) {
-		for (int j = -20; j <= 60; j += 10) {
+	for (int i = -70; i <= 110; i += 10) {
+		for (int j = -70; j <= 110; j += 10) {
 			// Triangle 1
 			vertices[Index].rgba = vec4(1, 1, 1, 1); vertices[Index].xyz = Quad[0].xyz + vec3(j, 0, i); Index++;
 			vertices[Index].rgba = vec4(1, 1, 1, 1); vertices[Index].xyz = Quad[1].xyz + vec3(j, 0, i); Index++;
@@ -33,7 +33,6 @@ void Ground::Render() {
 	glGenTextures(1, &TexBufferID);
 	glBindTexture(GL_TEXTURE_2D, TexBufferID);
 
-	
 	texID = Shader.GetVariable("texMap");
 	Shader.SetInt(texID, 0);
 

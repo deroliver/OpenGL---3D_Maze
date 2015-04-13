@@ -1,5 +1,5 @@
 #include <iostream>
-
+#include "WindowManager.h"
 #include "GL\glew.h"
 #include "GraphicsObject.h"
 #include "Source.h"
@@ -8,24 +8,31 @@
 #include "MazeBlocks.h"
 #include "Skybox.h"
 
-SkyBox Skybox(200);
-Ground Ground_1(486);
-MazeBlocks Maze(16000);
+SkyBox Skybox(36);		// Skybox object
+Ground Ground_1(2096);	// Ground object
+MazeBlocks Maze(16000);	// Maze object
 
 
+// Main() function that abstracts the required main function
 int Source::Main() {
 
+	// Calls the Initialize function below
 	Initialize();
 
+	// Calls the GameLoop function - runs until the window is closed or escape is pressed
 	GameLoop();
 
+	// Cleans up
 	Destroy();
 
 	return 0;
 }
 
+
+// Initializes the window, shaders, and objects
 void Source::Initialize() {
 
+	// Makes sure the WindowManager is initializes
 	if (!WindowManager || WindowManager->Initialize(ScreenWidth, ScreenHeight, "MidTerm Project", false) != 0) {
 
 		exit(-1);
@@ -37,51 +44,96 @@ void Source::Initialize() {
 	// Tells OpenGl we want depth testing so it renders the order correctly
 	glEnable(GL_DEPTH_TEST);
 
-	Skybox.Initialize(Skybox.vertices, 200, "Shaders/Shader.VertNorm", "Shaders/Shader.FragNorm");
-	Ground_1.Initialize(Ground_1.vertices, 486, "Shaders/Shader.VertText", "Shaders/Shader.FragText");
+	// Initialize all of our objects using the specificed shaders
 	Maze.Initialize(Maze.vertices, 16000, "Shaders/Shader.VertNorm", "Shaders/Shader.FragNorm");
-
-
+	Skybox.Initialize(Skybox.vertices, 36, "Shaders/Shader.VertNorm", "Shaders/Shader.FragNorm");
+	Ground_1.Initialize(Ground_1.vertices, 2096, "Shaders/Shader.VertText", "Shaders/Shader.FragText");
+	
 
 	// Create the projection matrix for our camera and make the near field closer and the far field farther
 	Camera->SetPersepective(radians(75.0f), ScreenWidth / (float)ScreenHeight, 0.01f, 1000);
 
-	Camera->PositionCamera(0, 50, -10, 0, 0);
+	// Set the camera position
+	Camera->PositionCamera(-63, 5, -21.9, 0, 0);
 
+	// Set the camera for our skybox
 	Skybox.SetCamera(Camera);
+	// Set Skybox position
 	Skybox.SetPosition(vec3(0, 75, 0));
 
+	// Set the camera for our skybox
 	Maze.SetCamera(Camera);
-	Maze.SetPosition(vec3(-7, 0, -7));
+	// Set maze position
+	Maze.SetPosition(vec3(-65, 0, -65));
 
+	/*
+	for (int i = 0; i < Maze.Rects.size(); i++) {
+		Maze.Rects.at(i).X += (-65);
+		Maze.Rects.at(i).Z += (-65);
+	}
+	*/
+
+	// Set the camera for our skybox
 	Ground_1.SetCamera(Camera);
+	// Set ground position
 	Ground_1.SetPosition(vec3(0, 0, 0));
 }
 
+// Checks collision between a vec3 and a Rec object
+bool Source::CheckCollision(vec3 Cam, Rec Rect) {
+	if (glm::abs(Cam.x - Rect.X) < 2.0 + Rect.GetSizeX()) {
+
+		if (glm::abs(Cam.y - Rect.Y) < 5.0 + Rect.GetSizeY()) {
+
+			if (glm::abs(Cam.z - Rect.Z) < 2.0 + Rect.GetSizeZ()) {
+				return true;
+			}
+		}	
+	}
+	return false;
+}
 
 
 void Source::GameLoop() {
-
+	// Processes input, and displays the frame rate
 	while (WindowManager->ProcessInput(true)) {
+		/*
+		for (int i = 0; i < Maze.Rects.size(); i++) {
+			if (CheckCollision(Camera->GetPosition(), Maze.Rects.at(i))) {
+				Camera->SetPosition(Camera->GetPosition());
+			}
+		}
+		*/
+
+		// Use the TimeManager to calculate the framerate
 		TimeManager::Instance().CalculateFrameRate(true);
 
+		// Clear the buffer
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
+		// Render all of our objects
 		Skybox.Render();
 		Ground_1.Render();
 		Maze.Render();
 
+		// Tell the thread to sleep - Slowing down the program
 		TimeManager::Instance().Sleep(10);
 
+		// Swap the buffers
 		WindowManager->SwapTheBuffers();
 	}
 }
 
 
+// Used to cleanup the application
 void Source::Destroy() {
 
+	// Destroy our objects
 	Ground_1.Destroy();
+	Maze.Destroy();
+	Skybox.Destroy();
 
+	// If there is still a WindowManager - Destroy it
 	if (WindowManager) {
 		WindowManager->Destroy();
 
@@ -89,7 +141,7 @@ void Source::Destroy() {
 		WindowManager = nullptr;
 	}
 
-
+	// If there is still a camera - Destroy it
 	if (Camera) {
 		delete Camera;
 		Camera = nullptr;

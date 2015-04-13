@@ -1,24 +1,28 @@
 #include "GLFWManager.h"
 
-
+// Entry point for our application
 int main() {
 
+	// Create the WindowManager implementation
 	GLFWManager *pWM = new GLFWManager;
 
+	// Initialize a camera to be used for our application
 	Camera *pCam = new Camera();
 
-
+	// Create an instance of our Source class and set its WindowManager
 	Source source;
 	source.SetWindowManager(pWM);
 
+	// Set the created camera as our Source class camera - pass it to our InputManager
 	source.SetCamera(pCam);
 	pWM->GetInputManager()->SetCamera(pCam);
 
-
+	// Return the Main(), which handles the flow of our application - immedietaly starts our game loop
 	return source.Main();
 }
 
 
+// Initializes our window - Creates the OpenGL context
 int GLFWManager::Initialize(int W, int H, std::string Title, bool Full) {
 
 	// Tries to init the GLFW library and make sure its available
@@ -97,7 +101,7 @@ bool GLFWManager::ProcessInput(bool Continue = true) {
 	if (glfwGetKey(Window, GLFW_KEY_ESCAPE) == GLFW_PRESS || glfwWindowShouldClose(Window) != 0)
 		return false;
 
-
+	// Check if the UP, LEFT, DOWN, RIGHT, or W,A,S,D keys are pressed and send the InputCode to our input manager to move the camera
 	if (glfwGetKey(Window, GLFW_KEY_UP) || glfwGetKey(Window, GLFW_KEY_W))
 		InputManager.KeyPressed(InputCode::Up);
 

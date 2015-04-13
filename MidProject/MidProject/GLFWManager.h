@@ -10,6 +10,8 @@
 #include "Source.h"
 
 
+// Implementation of abstract base class WindowManager
+// Uses GLFW to create a window, handle input, as well as create the OpenGL context
 class GLFWManager : public WindowManager {
 
 public:

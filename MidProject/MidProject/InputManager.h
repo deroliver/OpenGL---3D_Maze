@@ -5,6 +5,7 @@
 
 #include "Camera.h"
 
+// Enum used for Keyboard input movement
 enum InputCode {
 
 	Escape = 27,

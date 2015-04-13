@@ -20,34 +20,48 @@ public:
 	int Y;
 };
 
+// A simple Position class, to keep track of each rectangle in the Maze wall
+class Rec {
+public:
+	float X, Y, Z;
+	float GetSizeX() { return   5.5; }
+	float GetSizeY() { return  10.0; }
+	float GetSizeZ() { return 0.125; }
+};
+
+
 // The Vertices for the Horizantal Walls
 const vec3 Block[8] = {
-	// Front Face
-	vec3(-10.0, -5.0, 0.0),
-	vec3(-10.0,  8.0, 0.0),
-	vec3( -5.0,  8.0, 0.0), 
-	vec3( -5.0, -5.0, 0.0), 
-
 	// Rear Face
 	vec3(-10.0, -5.0, 0.25),
-	vec3(-10.0,  8.0, 0.25), 
-	vec3( -5.0,  8.0, 0.25),
-	vec3( -5.0, -5.0, 0.25)
+	vec3(  0.0, -5.0, 0.25),
+
+	vec3(  0.0, 20.0, 0.25), 
+	vec3(-10.0, 20.0, 0.25), 
+
+	// Rear Face
+	vec3(-10.0, -5.0, 0.0),
+	vec3(  0.0, -5.0, 0.0),
+
+	vec3(  0.0, 20.0, 0.0),
+	vec3(-10.0, 20.0, 0.0),
 };
 
 // The Vertices for the Vertical Walls
 const vec3 Block2[8] = {
 	// Front Face
-	vec3(-9.75, -5.0, 0.0), 
-	vec3(-9.75,  8.0, 0.0), 
-	vec3(-9.75,  8.0, 5.0), 
-	vec3(-9.75, -5.0, 5.0), 
+	vec3(-9.75, -5.0,  0.0), 
+	vec3(-9.75,  20.0,  0.0), 
+
+	vec3(-9.75,  20.0, 10.0), 
+	vec3(-9.75, -5.0, 10.0), 
 
 	// Rear Face
-	vec3(-10.0, -5.0, 0.0),
-	vec3(-10.0,  8.0, 0.0), 
-	vec3(-10.0,  8.0, 5.0), 
-	vec3(-10.0, -5.0, 5.0), 
+	vec3(-10.0, -5.0,  0.0),
+	vec3(-10.0,  20.0,  0.0), 
+
+	vec3(-10.0,  20.0, 10.0), 
+	vec3(-10.0, -5.0, 10.0), 
 };
 
 
@@ -57,20 +71,26 @@ class MazeBlocks : public GraphicsObject {
 
 public:
 
+	// Holds an array of rectangles that make up the wall
+	std::vector<Rec> Rects;
+
 	// The array to keep track of the Walls
-	MazeSpace Maze[11][11];
+	MazeSpace Maze[17][17];
 
 	// The array to keep track of the rooms that have been visited
-	MazeSpace MazeRoom[12][12];
+	MazeSpace MazeRoom[18][18];
 	
 	// Vertices for the maze walls
-	Vertex3 vertices[16000];
+	Vertex3 vertices[20000];
 
 	// Stack to hold the positions for the rooms in the maze
 	std::stack<XY> Rooms;
 
 
 	int Index = 0;
+
+	// Creates a rectangle in the wall - Used for collision detection
+	void CreateRect(int xOff, int zOff);
 
 	// Constructor
 	MazeBlocks(int length);
