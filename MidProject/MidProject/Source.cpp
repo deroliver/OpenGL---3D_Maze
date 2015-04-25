@@ -9,7 +9,7 @@
 #include "Skybox.h"
 
 SkyBox Skybox(36);		// Skybox object
-Ground Ground_1(2096);	// Ground object
+Ground Ground_1(2166);	// Ground object
 MazeBlocks Maze(16000);	// Maze object
 
 
@@ -45,16 +45,16 @@ void Source::Initialize() {
 	glEnable(GL_DEPTH_TEST);
 
 	// Initialize all of our objects using the specificed shaders
-	Maze.Initialize(Maze.vertices, 16000, "Shaders/Shader.VertNorm", "Shaders/Shader.FragNorm");
+	Maze.Initialize(Maze.vertices, 16000, "Shaders/Shader.VertText", "Shaders/Shader.FragText");
 	Skybox.Initialize(Skybox.vertices, 36, "Shaders/Shader.VertNorm", "Shaders/Shader.FragNorm");
-	Ground_1.Initialize(Ground_1.vertices, 2096, "Shaders/Shader.VertText", "Shaders/Shader.FragText");
+	Ground_1.Initialize(Ground_1.vertices, 2166, "Shaders/Shader.VertText", "Shaders/Shader.FragText");
 	
 
 	// Create the projection matrix for our camera and make the near field closer and the far field farther
 	Camera->SetPersepective(radians(75.0f), ScreenWidth / (float)ScreenHeight, 0.01f, 1000);
 
 	// Set the camera position
-	Camera->PositionCamera(-63, 5, -21.9, 0, 0);
+	Camera->PositionCamera(-69, 95, -22, 0, 0);
 
 	// Set the camera for our skybox
 	Skybox.SetCamera(Camera);
@@ -66,12 +66,12 @@ void Source::Initialize() {
 	// Set maze position
 	Maze.SetPosition(vec3(-65, 0, -65));
 
-	/*
+	
 	for (int i = 0; i < Maze.Rects.size(); i++) {
 		Maze.Rects.at(i).X += (-65);
 		Maze.Rects.at(i).Z += (-65);
 	}
-	*/
+	
 
 	// Set the camera for our skybox
 	Ground_1.SetCamera(Camera);
@@ -97,13 +97,11 @@ bool Source::CheckCollision(vec3 Cam, Rec Rect) {
 void Source::GameLoop() {
 	// Processes input, and displays the frame rate
 	while (WindowManager->ProcessInput(true)) {
-		/*
 		for (int i = 0; i < Maze.Rects.size(); i++) {
 			if (CheckCollision(Camera->GetPosition(), Maze.Rects.at(i))) {
-				Camera->SetPosition(Camera->GetPosition());
+				//Camera->SetPosition
 			}
 		}
-		*/
 
 		// Use the TimeManager to calculate the framerate
 		TimeManager::Instance().CalculateFrameRate(true);

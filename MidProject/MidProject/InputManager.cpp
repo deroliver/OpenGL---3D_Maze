@@ -1,6 +1,8 @@
 #include "InputManager.h"
 #include "TimeManager.h"
 
+
+
 // Takes a code - Depending on the value, moves the camera
 void InputManager::KeyPressed(InputCode c) {
 

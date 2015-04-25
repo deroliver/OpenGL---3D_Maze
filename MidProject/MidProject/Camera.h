@@ -77,7 +77,7 @@ protected:
 
 	glm::vec3 Position;				// Camera's position	
 
-	float Speed = 10.0;				// Camera's Speed
+	float Speed = 5.0;				// Camera's Speed
 	float RotationSpeed = 2.0;		// Camera's rotation speed
 	float Yaw = 0.0;				// The horizantal rotation angle - Y-Axis
 	float Pitch = 0.0;				// The vertical rotation angle - X-Axis
